@@ -1,0 +1,5 @@
+EmployeeID,Name,Email,Role,Manager_EmployeeID
+E001,John Doe,john.doe@example.com,Employee,E003
+E002,Jane Smith,jane.smith@example.com,Employee,E003
+E003,Michael Brown,michael.brown@example.com,Manager,
+E004,Linda White,linda.white@example.com,Employee,E003

@@ -1,0 +1,4 @@
+LeaveID,EmployeeID,LeaveTypeID_LeaveTypeID,FromDate,ToDate,Status,Reason,Manager_EmployeeID,Comments
+550e8400-e29b-41d4-a716-446655440000,E001,LT01,2025-12-01,2025-12-05,Pending,Vacation,E003,
+550e8400-e29b-41d4-a716-446655440001,E002,LT02,2025-11-20,2025-11-22,Approved,Sick leave,E003,Get well soon
+550e8400-e29b-41d4-a716-446655440002,E004,LT03,2025-12-10,2025-12-11,Rejected,Personal work,E003,Not approved

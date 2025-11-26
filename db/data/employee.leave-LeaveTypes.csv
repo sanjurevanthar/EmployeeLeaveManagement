@@ -1,0 +1,5 @@
+LeaveTypeID,Code,Description,MaxDays
+LT01,ANL,Annual Leave,30
+LT02,SCK,Sick Leave,15
+LT03,CMP,Compensatory Leave,10
+LT04,MAT,Maternity Leave,90
