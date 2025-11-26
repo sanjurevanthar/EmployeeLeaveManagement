@@ -3,13 +3,10 @@ package customer.employeeleavemanagement.handler;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.when;
 
-import org.h2.command.dml.Delete;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -21,8 +18,6 @@ import com.sap.cds.services.persistence.PersistenceService;
 import cds.gen.employeeleaveservice.ApprovalLeaveContext;
 import cds.gen.employeeleaveservice.CancelLeaveContext;
 import cds.gen.employeeleaveservice.RejectLeaveContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class EmployeeLeaveHandlerTest {
 
@@ -93,12 +88,14 @@ public class EmployeeLeaveHandlerTest {
 
     }
 
-    // @Test
-    // void testOnCancelException() {
-    //     when(cancelLeaveContext.getLeaveID()).thenReturn("null");
+    @Test
+    void testOnCancelException() {
+        when(cancelLeaveContext.getLeaveID()).thenReturn("null");
         
-    //     doNothing().when(db).run(any(CqnDelete.class));
+        // Make db.run() throw exception → triggers catch block
+        when(db.run(any(CqnDelete.class)))
+            .thenThrow(new RuntimeException("DB error"));
 
-    //     employeeLeaveHandler.onApproval(approvalLeaveContext);
-    // }
+        employeeLeaveHandler.onApproval(approvalLeaveContext);
+    }
 }
