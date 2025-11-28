@@ -1,0 +1,41 @@
+<mvc:View
+    xmlns="sap.m"
+    controllerName="app.controller.App"
+
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+
+
+    <App>
+        <Page title="Employee Management System">
+
+            <VBox class="sapUiMediumMargin">
+
+                <!-- Dropdown With Go Button -->
+                <HBox alignItems="Center">
+                <!-- Small Title -->
+                    <Title text="Choose View:" level="H5" class="sapUiTinyMarginEnd"/>
+
+
+                    <!-- Dropdown -->
+                    <Select id="roleSelect" width="200px">
+                        <items>
+                            <core:Item key="Manager" text="Manager" />
+                            <core:Item key="Employee" text="Employee" />
+                        </items>
+                    </Select>
+
+                    <!-- Go Button -->
+                    <Button 
+                        text="Go" 
+                        class="sapUiSmallMarginBegin"
+                        press=".onGoPress" />
+                </HBox>
+
+            </VBox>
+
+        </Page>
+    </App>
+
+</mvc:View>
