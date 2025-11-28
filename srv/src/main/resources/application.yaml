@@ -5,3 +5,16 @@ spring:
   sql.init.platform: h2
 cds:
   data-source.auto-config.enabled: false
+
+cors:
+  enabled: true
+  allowed-origins:
+    - http://localhost:8081
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+  allowed-headers:
+    - "*"
