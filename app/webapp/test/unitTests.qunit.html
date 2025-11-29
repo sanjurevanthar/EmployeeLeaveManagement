@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Unit Tests</title>
+
+  <!-- QUnit CSS (load early) -->
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.21.0.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+
+  <!-- QUnit and Sinon (load before UI5 so tests and mocks are available) -->
+  <script src="https://code.jquery.com/qunit/qunit-2.21.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/15.2.0/sinon.min.js"></script>
+
+  <!-- Prevent QUnit auto-start until tests are required -->
+  <script>
+    QUnit.config.autostart = false;
+  </script>
+
+  <!-- UI5 bootstrap: map "app" -> ../ (one level up from webapp/test -> webapp) -->
+  <script
+    id="sap-ui-bootstrap"
+    src="https://ui5.sap.com/resources/sap-ui-core.js"
+    data-sap-ui-theme="sap_horizon"
+    data-sap-ui-libs="sap.m"
+    data-sap-ui-resourceroots='{"app":"../"}'>
+  </script>
+
+  <!-- Load tests via UI5 loader then start QUnit -->
+  <script>
+    sap.ui.getCore().attachInit(function () {
+      sap.ui.require([
+        "app/test/unit/AllTests"
+      ], function () {
+        QUnit.start();
+      }, function (err) {
+        // Print loader error so you can see the exact path UI5 tried to fetch
+        console.error("Error loading AllTests.js:", err);
+        QUnit.start();
+      });
+    });
+  </script>
+</body>
+</html>

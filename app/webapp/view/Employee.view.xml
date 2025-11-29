@@ -59,6 +59,50 @@
         </endButton>
 
       </Dialog>
+      <!-- ADD THIS BELOW YOUR DIALOG -->
+<Title text="My Leave Requests" level="H6" class="sapUiSmallMarginTop" />
+
+<HBox alignItems="Center" class="sapUiSmallMarginTop">
+  <Label text="Employee ID" />
+  <Input id="viewEmployeeID" width="140px" placeholder="E05" />
+  <Button text="Refresh" press=".onRefreshRequests" class="sapUiSmallMarginBegin" />
+</HBox>
+
+<List id="employeeRequestsList"
+      items="{employeeRequests>/items}"
+      inset="false"
+      noDataText="No leave requests found"
+      class="sapUiSmallMarginTop">
+
+  <CustomListItem>
+    <HBox width="100%" alignItems="Start" justifyContent="SpaceBetween">
+
+      <!-- LEFT SIDE: Based on Employee LEFT BOX -->
+      <VBox width="70%" class="sapUiSmallMarginEnd">
+        <Label text="Days" />
+        <Text text="{= ${employeeRequests>FromDate} + ' → ' + ${employeeRequests>ToDate} }"
+              class="sapUiSmallMarginBottom"/>
+
+        <Label text="Reason" />
+        <Text text="{employeeRequests>Reason}" class="sapUiSmallMarginBottom"/>
+
+        <Label text="Status" />
+        <Text text="{employeeRequests>Status}" />
+      </VBox>
+
+      <!-- RIGHT SIDE: Cancel only for Pending -->
+      <VBox width="28%" alignItems="End">
+        <Button text="Cancel"
+                type="Reject"
+                visible="{= ${employeeRequests>Status} === 'Pending' }"
+                press=".onCancelPress"
+                width="100%"/>
+      </VBox>
+
+    </HBox>
+  </CustomListItem>
+
+</List>
 
 
     </VBox>

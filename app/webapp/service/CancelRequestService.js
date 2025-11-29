@@ -3,8 +3,6 @@ sap.ui.define([], function () {
 "use strict";
 
 const BASE_URL = "http://localhost:8080/odata/v4/employeeleaveservice";
-const ACTION_URL = `${BASE_URL}/rejectLeave`; 
-//const LEAVE_URL = `${BASE_URL}/LeaveRequests`;
 
 
 //Function for Formating the LeaveId Key:
@@ -54,50 +52,45 @@ async function fetchOrthrow(url, option = {}){
 //Manin Function for Approval Request Service:
 
 async function cancelRequestService(payload){
-    
-    if(!payload || !payload.LeaveID ){
+    if (!payload || !payload.LeaveID) {
         throw new Error("Missing LeaveID");
     }
 
-    try{
+    const ACTION_URL = `${BASE_URL}/cancelLeave`;
 
-        //Action Call: cancel Request
+    try{
         const postRes = await fetchOrthrow(ACTION_URL, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "application/json"
             },
             body: JSON.stringify(payload)
         });
-        const cancelReq = await parseActionResponse(postRes);
-        
-        // //Patch Call: LeaveRequests
-        // const patchurl = `${LEAVE_URL}(${formatLeaveId(payload.LeaveID)})`;
-        // const patchBody = {
-        //     Status: "Rejected",
-        //     Comments: "" || payload.Comments
-        // };
-        // await fetchOrthrow(patchurl, {
-        //     method: "PATCH",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-        //     body: JSON.stringify(patchBody)
-        // });
 
+        // Try to parse JSON safely; if empty body return true
+        let parsed = null;
+        try {
+            const text = await postRes.text();
+            parsed = text ? JSON.parse(text) : null;
+        } catch (e) {
+            // not JSON or empty body
+            parsed = null;
+        }
 
-        return {cancelReq: cancelReq== undefined ? null : cancelReq};
+        console.log("cancelRequestService response parsed:", parsed);
+        return { cancelReq: parsed === undefined ? null : parsed };
 
-    }
-    catch(err){
+    } catch(err){
+        console.error("cancelRequestService error:", err);
         throw err;
     }
-    
 }
 
 return {
     cancelRequestService
 };
+
 
     
 });

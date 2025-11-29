@@ -10,7 +10,7 @@ entity Employees : managed{
 
     Manager: Association to Employees; // self associtions
 }
-
+@Ui5
 entity LeaveRequests : managed{
 
     key LeaveID: UUID;
