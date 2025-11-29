@@ -1,9 +1,88 @@
 <mvc:View
- xmlns="sap.m"
-    xmlns:mvc="sap.ui.core.mvc"
-    xmlns:core="sap.ui.core"
-    displayBlock="true">
+controllerName="app.controller.Manager"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc"
+  displayBlock="true">
+<App >
+<Page title="Manager - Leave Requests Approval Page"
+      showNavButton="true"
+      navButtonPress=".onBackPress">
+      
+    <content>
+      <VBox class="sapUiSmallMargin">
+        <Title text="Leave Requests" level="H5"/>
 
-      <Text text="This is a Manager View" />
+        <Toolbar>
+          <Label text="Manager ID" />
+          <Input id="managerIdInput" width="200px" placeholder="e.g. E50" />
+          <Button text="Go" icon="sap-icon://search" press=".onSearchPress" />
+          <ToolbarSpacer />
+          <Button text="Clear" press=".onClearPress" />
+        </Toolbar>
 
+        <Text id="resultSummary" visible="false" />
+
+        <List id="managerList"
+      items="{requests>/items}"
+      inset="false"
+      mode="None"
+      noDataText="No requests found">
+
+    <CustomListItem>
+        <HBox width="100%" alignItems="Start" justifyContent="SpaceBetween">
+          <!-- LEFT SIDE: Request info -->
+          <VBox width="60%" class="sapUiSmallMarginEnd">
+
+              <Label text="Employee" class="sapMLabel"/>
+              <Text text="{requests>employeeName}" class="sapMText sapUiSmallMarginBottom"/>
+
+              <Label text="Days" class="sapMLabel"/>
+              <Text text="{= ${requests>from} + ' → ' + ${requests>to} }"
+                    class="sapMText sapUiSmallMarginBottom"/>
+
+              <Label text="Reason" class="sapMLabel"/>
+              <Text text="{requests>type}" class="sapMText sapUiSmallMarginBottom"/>
+
+              <Label text="Status" class="sapMLabel"/>
+              <Text text="{requests>status}" class="sapMText"/>
+              
+          </VBox>
+
+
+            <!-- RIGHT SIDE: Comments + Buttons -->
+            <VBox width="35%" alignItems="End" class="sapUiSmallMarginBegin">
+
+                <Label text="Accept comment"/>
+                <TextArea rows="2"
+                          value="{requests>acceptComment}"
+                          width="100%" placeholder="Optional note"/>
+
+                <Button text="Accept"
+                        type="Accept"
+                        press=".onAcceptPress"
+                        class="sapUiSmallMarginTop"
+                        width="100%"/>
+
+                <Label text="Reject comment" class="sapUiSmallMarginTop"/>
+                <TextArea rows="2"
+                          value="{requests>rejectComment}"
+                          width="100%" placeholder="Reason"/>
+
+                <Button text="Reject"
+                        type="Reject"
+                        press=".onRejectPress"
+                        class="sapUiSmallMarginTop"
+                        width="100%"/>
+
+            </VBox>
+        </HBox>
+    </CustomListItem>
+
+</List>
+
+      </VBox>
+    </content>
+  </Page>
+</App>
+  
 </mvc:View>

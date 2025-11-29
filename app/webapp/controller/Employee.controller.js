@@ -51,7 +51,17 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
                     });
 
 
-                }
+                },
+
+        // Back button in header — simple & correct for your XMLView.create flow
+        onBackPress: function () {
+            if (window.navigationVariable) {
+                window.navigationVariable("App"); // recreate the App view (go back)
+            } else {
+                console.error("window.navigationVariable is not defined");
+            }
+        }
+
 
             
         });

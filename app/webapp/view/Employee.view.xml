@@ -5,7 +5,10 @@
   xmlns:core="sap.ui.core"
   displayBlock="true">
 <App >
-  <Page title="Employee View">
+  <Page id="employeePage"
+          title="Employee View"
+          showNavButton="true"
+          navButtonPress=".onBackPress">
 
     <VBox class="sapUiSmallMargin">
       <Title text="Leave Request Page:" level="H5" class="sapUiTinyMarginEnd"/>
@@ -56,6 +59,7 @@
         </endButton>
 
       </Dialog>
+
 
     </VBox>
 
